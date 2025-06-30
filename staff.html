@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Produits de Cuisine</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .produit {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .produit img {
+      width: 150px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+    .details {
+      flex: 1;
+      text-align: left;
+    }
+    .details p {
+      margin: 5px 0;
+    }
+    .acheter {
+      text-align: center;
+    }
+    select, button {
+      padding: 5px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e7e34;
+    }
+    #voirAchatsBtn {
+      margin: 20px;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+    }
+  </style>
+
+  <script>
+    function ajouterAchat(nomProduit, idQuantite) {
+      const quantite = document.getElementById(idQuantite).value;
+      let achats = JSON.parse(localStorage.getItem("achats")) || [];
+      achats.push({ produit: nomProduit, quantite: quantite });
+      localStorage.setItem("achats", JSON.stringify(achats));
+      alert("Produit ajouté : " + nomProduit + " x" + quantite);
+    }
+
+    function voirAchats() {
+      window.location.href = "achats.html"; 
+    }
+  </script>
+</head>
+<body>
+
+  <h2>Produits de Cuisine</h2>
+  <button id="voirAchatsBtn" onclick="voirAchats()"> <a herf="achats.html" ></a>Mes Achats</button>
+
+  
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSJS_Si45xqBMmC8jIOChLj9T9JMaK4QZkBg&s" alt="Chaise">
+    <div class="details">
+      <p><strong>Chaise de cuisine</strong></p>
+      <p>Matériau : Bois massif</p>
+      <p>Prix : 250 DH</p>
+    </div>
+    <div class="acheter">
+      <label for="q1">Quantité :</label>
+      <select id="q1">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+      </select><br>
+      <button onclick="ajouterAchat('Chaise de cuisine', 'q1')">Acheter</button>
+    </div>
+  </div>
+
+
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqNnMp2KQmXpp7OZMbTsaRNb1TdZ-Z7dnc4A&s" alt="Table">
+    <div class="details">
+      <p><strong>Table de cuisine</strong></p>
+      <p>Matériau : Bois et métal</p>
+      <p>Prix : 900 DH</p>
+    </div>
+    <div class="acheter">
+      <label for="q2">Quantité :</label>
+      <select id="q2">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+      </select><br>
+      <button onclick="ajouterAchat('Table de cuisine', 'q2')">Acheter</button>
+    </div>
+  </div>
+
+  
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevtLFTCsarFoIIIyFy9DmrMe3r02csgZTGg&s" alt="Casseroles">
+    <div class="details">
+      <p><strong>Set de casseroles</strong></p>
+      <p>Matériau : Inox</p>
+      <p>Prix : 600 DH</p>
+    </div>
+    <div class="acheter">
+      <label for="q3">Quantité :</label>
+      <select id="q3">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+      </select><br>
+      <button onclick="ajouterAchat('Set de casseroles', 'q3')">Acheter</button>
+    </div>
+  </div>
+
+  
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8D-IwB6dm_UAO0oHqa-udEU9lfrg2B2Dbtg&s" alt="Cuillères">
+    <div class="details">
+      <p><strong>Cuillères</strong></p>
+      <p>Matériau : Acier inoxydable</p>
+      <p>Prix : 50 DH (6 pièces)</p>
+    </div>
+    <div class="acheter">
+      <label for="q4">Quantité :</label>
+      <select id="q4">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+        <option>7</option><option>8</option><option>9</option>
+        <option>10</option><option>11</option><option>12</option>
+      </select><br>
+      <button onclick="ajouterAchat('Cuillères', 'q4')">Acheter</button>
+    </div>
+  </div>
+
+
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQmkcSNmrVDY4uWytTi_JLOEmHkXRtSaPHGQ&s" alt="Fourchettes">
+    <div class="details">
+      <p><strong>Fourchettes</strong></p>
+      <p>Matériau : Acier inoxydable</p>
+      <p>Prix : 45 DH (4 pièces)</p>
+    </div>
+    <div class="acheter">
+      <label for="q5">Quantité :</label>
+      <select id="q5">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+        <option>7</option><option>8</option><option>9</option>
+        <option>10</option><option>11</option><option>12</option>
+      </select><br>
+      <button onclick="ajouterAchat('Fourchettes', 'q5')">Acheter</button>
+    </div>
+  </div>
+
+ 
+  <div class="produit">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnHhiREROtu2JwHC28UH2z5N4BJwnlfgnYag&s" alt="Couteaux">
+    <div class="details">
+      <p><strong>Couteaux</strong></p>
+      <p>Matériau : Acier forgé</p>
+      <p>Prix : 120 DH</p>
+    </div>
+    <div class="acheter">
+      <label for="q6">Quantité :</label>
+      <select id="q6">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+        <option>7</option><option>8</option><option>9</option>
+        <option>10</option><option>11</option><option>12</option>
+      </select><br>
+      <button onclick="ajouterAchat('Couteaux', 'q6')">Acheter</button>
+    </div>
+  </div>
+
+</body>
+</html>
