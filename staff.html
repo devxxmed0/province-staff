@@ -1,150 +1,162 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>achats</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 20px;
-    }
-    select, button {
-      padding: 8px;
-      margin: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .produit {
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 15px;
-      margin: 15px;
-      width: 280px;
-      display: inline-block;
-      vertical-align: top;
-    }
-    .produit img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .produit h3 {
-      margin: 10px 0 5px 0;
-    }
-    .produit p {
-      margin: 5px 0;
-    }
-    .btn-acheter {
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-    }
-    .btn-acheter:hover {
-      background-color: #1e7e34;
-    }
-    #voirAchatsBtn {
-      margin: 20px;
-      padding: 10px;
-      background-color: black;
-      color: white;
-      border-radius: 10px;
-    }
-  </style>
-  <script>
-    function ajouterAchat(nomProduit, idQuantite) {
-      const quantite = document.getElementById(idQuantite).value;
-      let achats = JSON.parse(localStorage.getItem("achats")) || [];
-      achats.push({ produit: nomProduit, quantite: quantite });
-      localStorage.setItem("achats", JSON.stringify(achats));
-      alert("Produit ajouté : " + nomProduit + " x" + quantite);
-    }
-    let total = 0
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notre Équipe</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #eef1f5;
+        padding: 30px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 30px;
+        font-size: 36px;
+        color: #333;
+      }
+      input[type="text"] {
+        padding: 12px;
+        width: 350px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+        font-size: 16px;
+      }
+      .employe {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px;
+        width: 280px;
+        display: inline-block;
+        vertical-align: top;
+        transition: transform 0.3s;
+      }
+      .employe:hover {
+        transform: translateY(-5px);
+      }
+      .employe img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .employe h3 {
+        margin: 15px 0 5px 0;
+        color: #222;
+      }
+      .employe p {
+        margin: 6px 0;
+        color: #555;
+      }
+      .btn-info {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+      .btn-info:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Notre Équipe</h1>
+    <input
+      type="text"
+      id="recherche"
+      placeholder="Rechercher un employé ou un poste..."
+      onkeyup=""
+    />
 
-    total+= prix * quantite 
-    function voirAchats() {
-      window.location.href = "achats.html"; 
-    }
-  </script>
-</head>
-<body>Catalogue
-  <h1> produits</h1>
-   <button id="voirAchatsBtn" onclick="voirAchats()"> <a herf="achats.html" ></a>facture</button>
-  <label for="categorieSelect">Filtrer par catégorie :</label>
-  <select id="categorieSelect" onchange="afficherProduits()">
-    <option value="tous">Tous</option>
-    <option value="maison">Maison</option>
-    <option value="cuisine">Cuisine</option>
-    <option value="dessin">Dessin</option>
-    <option value="bijoux">Bijoux</option>
-    <option value="vêtements">Vêtements</option>
-  </select>
+    <div id="employesContainer"></div>
 
-  <div id="produitsContainer"></div>
+    <script>
+      const employes = [
+        {
+          nom: "Amine Bakkali",
+          poste: "Développeur Web",
+          description: "Spécialiste en JavaScript et frameworks modernes.",
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          lien: "amine.html",
+        },
+        {
+          nom: "Sofia Lahlou",
+          poste: "Cheffe de Projet",
+          description: "Coordonne les équipes et gère les délais des projets.",
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          lien: "sofia.html",
+        },
+        {
+          nom: "Yassine Tazi",
+          poste: "Technicien Réseau",
+          description:
+            "Assure la maintenance et la sécurité des infrastructures réseau.",
+          image: "https://randomuser.me/api/portraits/men/76.jpg",
+          lien: "yassine.html",
+        },
+        {
+          nom: "Sirina Belkacem",
+          poste: "Graphiste",
+          description: "Crée des visuels professionnels pour l’entreprise.",
+          image: "https://randomuser.me/api/portraits/women/65.jpg",
+          lien: "sirina.html",
+        },
+        {
+          nom: "Ahmed Azouzi",
+          poste: "Support Technique",
+          description: "Résout les problèmes informatiques pour les employés.",
+          image: "https://randomuser.me/api/portraits/men/22.jpg",
+          lien: "ahmed.html",
+        },
+        {
+          nom: "Lamia Khadiri",
+          poste: "Analyste Données",
+          description: "Transforme les données en informations exploitables.",
+          image: "https://randomuser.me/api/portraits/women/12.jpg",
+          lien: "lamia.html",
+        },
+        {
+          nom: "Karim El Idrissi",
+          poste: "Ingénieur Sécurité",
+          description: "Veille à la cybersécurité de l’entreprise.",
+          image: "https://randomuser.me/api/portraits/men/91.jpg",
+          lien: "karim.html",
+        },
+        {
+          nom: "Nadia Fassi",
+          poste: "Responsable RH",
+          description: "Gère les ressources humaines et le recrutement.",
+          image: "https://randomuser.me/api/portraits/women/33.jpg",
+          lien: "nadia.html",
+        },
+      ];
 
-  <script>
-     
-    const produits = [
-      { categorie: "maison", nom: "Vase décoratif", prix: 600, description: "Céramique artisanale", image: "https://media.istockphoto.com/id/511671282/photo/chinese-antique-vase.jpg?s=2048x2048&w=is&k=20&c=t5e1hZPN_USrK8wG1BZc0NBW4iR3k3WhONjKmheMNLk=" },
-      { categorie: "maison", nom: "Salon moderne", prix: 3500, description: "Tissu haut de gamme", image: "https://plus.unsplash.com/premium_photo-1661926736128-f2b643f91d1e?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U2Fsb24lMjBtb2Rlcm5lfGVufDB8fDB8fHww" },
-      { categorie: "maison", nom: "Rideaux pour fenêtres", prix: 250, description: "Lin naturel", image: "https://plus.unsplash.com/premium_photo-1668073439372-2ceafa1222b7?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UmlkZWF1eCUyMHBvdXIlMjBmZW4lQzMlQUF0cmVzfGVufDB8fDB8fHww" },
-      { categorie: "cuisine", nom: "Table de cuisine", prix: 900, description: "Bois et métal", image: "https://plus.unsplash.com/premium_photo-1671594183111-b4c24e21af8e?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dW5lVGFibGUlMjBkZSUyMGN1aXNpbmV8ZW58MHx8MHx8fDA%3D" },
-      { categorie: "cuisine", nom: "Couteaux", prix: 120, description: "Acier forgé", image: "https://media.istockphoto.com/id/1311547036/fr/photo/couteau-en-acier-avec-la-poign%C3%A9e-en-bois-brune-sur-le-fond-blanc-sisolant-vers-le-haut-grand.webp?a=1&b=1&s=612x612&w=0&k=20&c=Pv_jb887Dp7lNh5RKlVVNSRtMa_HpZgRhh8uSjlM8Uo=" },
-      { categorie: "cuisine", nom: "Fourchettes", prix: 120, description: "Acier inoxydable", image: "https://plus.unsplash.com/premium_photo-1714675739685-7c34de3dc5a6?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGVzJTIwRm91cmNoZXR0ZXN8ZW58MHx8MHx8fDA%3D" },
-      { categorie: "dessin", nom: "Régle", prix: 20, description: "Plastique", image: "https://papel.tn/wp-content/uploads/2022/01/papel-tn-REGLE-PLATE-20-CM-MAPED-tunis1.png" },
-      { categorie: "dessin", nom: "Crayon", prix: 7, description: "Bois", image: "https://media2.ledevoir.com/image/817809.jpg" },
-      { categorie: "dessin", nom: "Stylo", prix: 10, description: "Plastique", image: "https://www.retif.lu/media/catalog/product/1/8/1813_Retif_PH_01.jpg" },
-      { categorie: "dessin", nom: "Gomme", prix: 5, description: "Caoutchouc", image: "https://media.istockphoto.com/id/510784432/fr/photo/gomme.webp?a=1&b=1&s=612x612&w=0&k=20&c=6enExMe_VhVR83jvoUPCBf8tMtfe4KxX7McoSiFdlws=" },
-      { categorie: "bijoux", nom: "Collier", prix: 600, description: "Acier inoxydable", image: "https://manoline.fr/cdn/shop/files/LAUREN_4.jpg" },
-      { categorie: "bijoux", nom: "Bracelet", prix: 500, description: "Acier inoxydable", image: "https://www.vanessa-tugendhaft.com/layout/uploads/2024/06/Bracelet-Chaine-Diamants-Or-Jaune-CELESTEPM2-scaled.jpg" },
-      { categorie: "bijoux", nom: "Boucles d'oreilles", prix: 250, description: "Acier inoxydable", image: "https://www.vuillermoz.fr/bijoux-thumb__w1000h1000zc2q95__/boucles-d-oreilles-pendantes-or-jaune-750-signe-infini-et-diamants_34521-1.webp" },
-      { categorie: "bijoux", nom: "Bague", prix: 200, description: "Acier inoxydable", image: "https://www.diamanta.fr/55-thickbox_default/bague-or-jaune-375-1000-joli-solitaire-diamant-027ct.jpg" },
-      { categorie: "bijoux", nom: "montre", prix: 600, description: "Acier inoxydable", image: "https://media.istockphoto.com/id/172214595/fr/photo/montre-or-diamond.webp?a=1&b=1&s=612x612&w=0&k=20&c=uIO8AgtSG2_ZZhJVKxNAVHnsfv7SYzIJ8cfWyXmS_jg=" },
-      { categorie: "vêtements", nom: "Robe", prix: 300, description: "Tissu", image: "https://i0.wp.com/www.youreleganceshop.com/wp-content/uploads/2021/07/robe-fleurie-manches-courtes-1.jpg" },
-      { categorie: "vêtements", nom: "Chemise", prix: 500, description: "Tissu pour homme", image: "https://www.jaf.ca/wp-content/uploads/2020/04/venti-solid-blue-1.jpg" },
-      { categorie: "vêtements", nom: "Jeans", prix: 250, description: "Jean pour femme", image: "https://www.patine.fr/cdn/shop/files/patine_fp_packshot_brenda_curvy_medium_V2.jpg" },
-      { categorie: "vêtements", nom: "T-shirt", prix: 250, description: "Tissu pour homme", image: "https://www.ateliertuffery.com/cdn/shop/files/t-shirt-homme-100-coton-bio-bleu-marine-3.jpg" }
-    ];
+      function afficherEmployes(liste) {
+        const conteneur = document.getElementById("employesContainer");
+        conteneur.innerHTML = "";
 
-    function afficherProduits() {
-      const filtre = document.getElementById("categorieSelect").value;
-      const conteneur = document.getElementById("produitsContainer");
-      conteneur.innerHTML = "";
-      const produitsFiltres = (filtre === "tous") ? produits : produits.filter(p => p.categorie === filtre);
-      produitsFiltres.forEach((produit, index) => {
-        const div = document.createElement("div");
-        div.className = "produit";
-        div.innerHTML = `
-          <img src="${produit.image}" alt="${produit.nom}">
-          <h3>${produit.nom}</h3>
-          <p>${produit.description}</p>
-          <p><strong>${produit.prix} DH</strong></p>
-          <label>Quantité :
-            <select id="quantite-${index}">
-              ${[...Array(6).keys()].map(i => `<option>${i + 1}</option>`).join("")}
-            </select>
-          </label><br><br>
-          <button class="btn-acheter" onclick="ajouterAchat('${produit.nom}', 'quantite-${index}',${produit.prix})">Acheter</button>
-        `;
-        conteneur.appendChild(div);
-      });
-    }
+        liste.forEach((emp) => {
+          const division = document.createElement("div");
+          division.className = "employe";
+          division.innerHTML = `<img src="${emp.image}" />
+          <h2>${emp.nom}</h2>
+           <h3>${emp.poste}</h3>
+          <p>${emp.description}</p>
+           
+          `;
+          conteneur.appendChild(division);
+        });
+      }
 
-    function ajouterAchat(nomProduit, idQuantite,prix) {
-      const quantite = document.getElementById(idQuantite).value;
-      let achats = JSON.parse(localStorage.getItem("achats")) || [];
-      achats.push({ produit: nomProduit, quantite: quantite ,prix});
-      localStorage.setItem("achats", JSON.stringify(achats));
-      alert("Produit ajouté : " + nomProduit + " x" + quantite );
-    }
-
-    afficherProduits();
-  </script>
-</body>
+      afficherEmployes(employes);
+    </script>
+  </body>
 </html>
