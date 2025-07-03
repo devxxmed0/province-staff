@@ -73,7 +73,7 @@
       type="text"
       id="recherche"
       placeholder="Rechercher un employé ou un poste..."
-      onkeyup=""
+      onkeyup="filtrerEmployes()"
     />
 
     <div id="employesContainer"></div>
@@ -155,7 +155,14 @@
           conteneur.appendChild(division);
         });
       }
+      function filtrerEmployes() {
+        const value = document.getElementById("recherche").value.toLowerCase();
 
+        const filteredList = employes.filter((emp) =>
+          emp.nom.toLowerCase().includes(value)
+        );
+        afficherEmployes(filteredList);
+      }
       afficherEmployes(employes);
     </script>
   </body>
