@@ -1,180 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Hotel Welcome Page</title>
-  <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notre Équipe</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-  html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-  }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #eef1f5;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    color:#333;
-  }
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+      }
 
-  .navbar .logo {
-    font-family: "Raleway";
-    font-optical-sizing: auto;
-    font-weight: 900px;
-    font-style:italic;
-    font-size: 25px;
-    color: #0077cc;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-  }
+      footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+      }
 
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-  }
+      h1 {
+        font-size: 36px;
+        margin: 0;
+      }
 
-  .navbar ul li {
-    display: inline;
-  }
+      input[type="text"] {
+        padding: 12px;
+        width: 300px;
+        max-width: 90%;
+        margin: 30px auto;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+        font-size: 16px;
+      }
 
-  .navbar ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .header :hover{
-    color: #0077cc;
-    transition: 0.15;
-  }
+      #employesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding-bottom: 60px;
+      }
 
-  .hero {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    position: relative;
-    padding-top: 250px; 
-  }
+      .employe {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 260px;
+        transition: transform 0.4s ease;
+      }
 
-  .hero h1 {
-    font-size: 64px;
-    letter-spacing: 5px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    margin-bottom: auto; 
-    font-family: "Playfair Display", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    color: #fdfbfb;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      .employe:hover {
+        transform: translateY(-5px);
+      }
 
-  }
+      .employe img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
 
-  .search-bar {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 1000px;
-    margin-bottom: 0px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
+      .employe h3 {
+        margin: 15px 0 5px;
+        color: #222;
+      }
 
-  .search-bar input, 
-  .search-bar select, 
-  .search-bar button {
-    padding: 10px 15px;
-    font-weight: bold;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-width: 120px;
-    margin-right: 10px; 
-  }
+      .employe p {
+        margin: 6px 0;
+        color: #555;
+      }
 
-  .search-bar button {
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+      .btn-info {
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
 
-  .search-bar button:hover {
-    background-color: #03385e;
-    transition: background-color 0.15s;
-  }
+      .btn-info:hover {
+        background-color: #2980b9;
+      }
 
-  
-  .footer {
-    background-color: #f5f5f5;
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-  }
+      #ficheEmploye {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 400px;
+        height: 100%;
+        background-color: white;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        padding: 30px 20px 20px;
+        overflow-y: auto;
+        transition: right 0.4s ease;
+        z-index: 999;
+        text-align: left;
+      }
 
-  </style>
-</head>
-<body>
-<div class="navbar">
-  <div class="logo">TANGIER PALM</div>
+      #ficheEmploye.active {
+        right: 0;
+      }
 
-<ul class="header">
-  <li><a href="web.html">Home</a></li>
-  <li><a href="staff.html">Staff</a></li>
-</ul>
-</div>
-<div class="hero">
-  <h1>WELCOME HOME</h1>
-  <div class="search-bar">
-    <input type="text" placeholder="who !!">
+      #ficheEmploye img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
 
+      #ficheEmploye h2,
+      #ficheEmploye h3 {
+        margin: 10px 0;
+        color: #222;
+      }
 
-    </select>
-    <button>Search</button>
-  </div>
-</div>
-<div class="footer">
-  &copy; 2025 TANGER PALM Real Estate. All rights reserved.
-</div>
- 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const searchButton = document.querySelector(".search-bar button");
-  searchButton.addEventListener("click", function() {
-    window.location.href = "xxxxxxxxxxxx";
-  });
-});
-</script>
+      #ficheEmploye p {
+        color: #444;
+        margin-bottom: 10px;
+      }
 
+      .cv-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: #2ecc71;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-</body>
+      .cv-btn:hover {
+        background-color: #27ae60;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 18px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .close-btn:hover {
+        background: red;
+      }
+
+      @media (max-width: 500px) {
+        #ficheEmploye {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Notre Équipe</h1>
+    </header>
+
+    <input
+      type="text"
+      id="recherche"
+      placeholder="Rechercher un employé ou un poste..."
+      onkeyup="filtrerEmployes()"
+    />
+
+    <div id="employesContainer"></div>
+
+    <div id="ficheEmploye">
+      <button class="close-btn" onclick="fermerFiche()">×</button>
+      <div id="ficheContent"></div>
+    </div>
+
+    <footer>&copy; 2025 Notre Équipe - Tous droits réservés</footer>
+
+    <script>
+      const { jsPDF } = window.jspdf;
+
+      const employes = [
+        // القائمة الأصلية الكاملة من الموظفين
+        {
+          nom: "Amine Bakkali",
+          poste: "Développeur Web",
+          description: "Spécialiste en JavaScript et frameworks modernes.",
+          cin: "AB123456",
+          dateEntree: "2020-04-15",
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+        },
+        {
+          nom: "Sofia Lahlou",
+          poste: "Cheffe de Projet",
+          description: "Coordonne les équipes et gère les délais des projets.",
+          cin: "SL654321",
+          dateEntree: "2019-09-12",
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+        },
+        {
+          nom: "Yassine Tazi",
+          poste: "Technicien Réseau",
+          description: "Maintenance et sécurité des infrastructures réseau.",
+          cin: "YT001122",
+          dateEntree: "2021-01-10",
+          image: "https://randomuser.me/api/portraits/men/76.jpg",
+        },
+        {
+          nom: "Sirina Belkacem",
+          poste: "Graphiste",
+          description: "Crée des visuels professionnels pour l’entreprise.",
+          cin: "SB334455",
+          dateEntree: "2020-06-18",
+          image: "https://randomuser.me/api/portraits/women/65.jpg",
+        },
+        {
+          nom: "Ahmed Azouzi",
+          poste: "Support Technique",
+          description: "Résout les problèmes informatiques.",
+          cin: "AA778899",
+          dateEntree: "2018-11-02",
+          image: "https://randomuser.me/api/portraits/men/22.jpg",
+        },
+        {
+          nom: "Lamia Khadiri",
+          poste: "Analyste Données",
+          description: "Transforme les données en décisions.",
+          cin: "LK556677",
+          dateEntree: "2022-03-01",
+          image: "https://randomuser.me/api/portraits/women/12.jpg",
+        },
+        {
+          nom: "Karim El Idrissi",
+          poste: "Ingénieur Sécurité",
+          description: "Responsable de la cybersécurité.",
+          cin: "KE998877",
+          dateEntree: "2020-12-05",
+          image: "https://randomuser.me/api/portraits/men/91.jpg",
+        },
+        {
+          nom: "Nadia Fassi",
+          poste: "Responsable RH",
+          description: "Gère les ressources humaines.",
+          cin: "NF445566",
+          dateEntree: "2017-07-22",
+          image: "https://randomuser.me/api/portraits/women/33.jpg",
+        },
+      ];
+
+      function afficherEmployes(liste) {
+        const conteneur = document.getElementById("employesContainer");
+        conteneur.innerHTML = "";
+
+        liste.forEach((emp, index) => {
+          const div = document.createElement("div");
+          div.className = "employe";
+          div.innerHTML = `
+            <img src="${emp.image}" alt="${emp.nom}" />
+            <h2>${emp.nom}</h2>
+            <h3>${emp.poste}</h3>
+            <p>${emp.description}</p>
+            <button class="btn-info" onclick="afficherFiche(${index})">Plus d'informations</button>
+          `;
+          conteneur.appendChild(div);
+        });
+      }
+
+      function afficherFiche(index) {
+        const emp = employes[index];
+        const panel = document.getElementById("ficheEmploye");
+        const content = document.getElementById("ficheContent");
+        const container = document.getElementById("employesContainer");
+
+        content.innerHTML = `
+          <img src="${emp.image}" />
+          <h2>${emp.nom}</h2>
+          <h3>${emp.poste}</h3>
+          <p><strong>Description:</strong> ${emp.description}</p>
+          <p><strong>CIN:</strong> ${emp.cin}</p>
+          <p><strong>Date d’entrée:</strong> ${emp.dateEntree}</p>
+          <p><strong>Email:</strong> ${emp.nom
+            .toLowerCase()
+            .replace(/ /g, ".")}@entreprise.com</p>
+          <p><strong>Téléphone:</strong> +212 6 12 34 56 78</p>
+          <button class="cv-btn" onclick="telechargerCV(${index})">📄 Télécharger le CV</button>
+        `;
+
+        panel.classList.add("active");
+        container.classList.add("transition-left");
+      }
+
+      function telechargerCV(index) {
+        const emp = employes[index];
+        const doc = new jsPDF();
+
+        doc.setFontSize(18);
+        doc.text(emp.nom, 20, 20);
+
+        doc.setFontSize(12);
+        doc.text(`Poste: ${emp.poste}`, 20, 35);
+        doc.text(`Description: ${emp.description}`, 20, 45);
+        doc.text(`CIN: ${emp.cin}`, 20, 55);
+        doc.text(`Date d'entrée: ${emp.dateEntree}`, 20, 65);
+        doc.text(
+          `Email: ${emp.nom.toLowerCase().replace(/ /g, ".")}@entreprise.com`,
+          20,
+          75
+        );
+        doc.text(`Téléphone: +212 6 12 34 56 78`, 20, 85);
+
+        doc.addImage(emp.image, "JPEG", 140, 20, 50, 50);
+
+        doc.save(`${emp.nom.replace(/ /g, "_")}_CV.pdf`);
+      }
+
+      function fermerFiche() {
+        document.getElementById("ficheEmploye").classList.remove("active");
+        document
+          .getElementById("employesContainer")
+          .classList.remove("transition-left");
+      }
+
+      function filtrerEmployes() {
+        const value = document.getElementById("recherche").value.toLowerCase();
+        const result = employes.filter(
+          (emp) =>
+            emp.nom.toLowerCase().includes(value) ||
+            emp.poste.toLowerCase().includes(value)
+        );
+        afficherEmployes(result);
+      }
+
+      afficherEmployes(employes);
+    </script>
+  </body>
 </html>
-
-
-
